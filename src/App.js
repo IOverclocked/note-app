@@ -16,6 +16,7 @@ const App = () => (
         href="https://reactjs.org"
         target="_blank"
         rel="noopener noreferrer"
+        alt="tested"
       >
         Learn React
       </a>
