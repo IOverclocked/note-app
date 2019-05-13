@@ -15,5 +15,13 @@
       }
     ],
     "react/jsx-indent": [1, 2]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   }
 }
