@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
+import LinkIcon from 'assets/link.svg';
 
 const Wrapper = styled.div`
   min-height: 380px;
@@ -16,8 +17,13 @@ const Wrapper = styled.div`
 `;
 
 const InnerWrapper = styled.div`
+  position: relative;
   padding: 17px 30px;
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.white)};
+
+  :first-of-type {
+    z-index: 999;
+  }
 
   ${({ flex }) =>
     flex &&
@@ -38,11 +44,42 @@ const StyledHeading = styled(Heading)`
   margin: 5px 0 0;
 `;
 
+const TwitterAvatar = styled.div`
+  width: 86px;
+  height: 86px;
+  border: 10px solid ${({ theme }) => theme.twitter};
+  border-radius: 50%;
+  background: ${({ theme }) => theme.white} url(${({ avatar }) => avatar});
+  background-position: contain;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 25px;
+  right: 20px;
+`;
+
+const ArticleLink = styled.a`
+  display: block;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: ${({ theme }) => theme.white} url(${LinkIcon});
+  background-size: 60%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+`;
+
 const Card = ({ cardType }) => (
   <Wrapper>
     <InnerWrapper activeColor={cardType}>
       <StyledHeading>Hello note</StyledHeading>
       <DateInfo>3 days</DateInfo>
+      {cardType === 'twitter' && <TwitterAvatar avatar="https://avatars.io/twitter/reactjs" />}
+      {cardType === 'article' && <ArticleLink href="#" />}
     </InnerWrapper>
     <InnerWrapper flex>
       <Paragraph>
