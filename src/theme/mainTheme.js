@@ -1,4 +1,4 @@
-export const theme = {
+const theme = {
   note: 'hsl(49, 100%, 58%)',
   article: 'hsl(106, 47%, 64%)',
   twitter: 'hsl(196, 83%, 75%)',
@@ -20,3 +20,5 @@ export const theme = {
     xl: '4rem',
   },
 };
+
+export default theme;
