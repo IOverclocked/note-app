@@ -18,7 +18,7 @@ const primary = () => {
 
 const secondary = () => <Button secondary>Secondary</Button>;
 
-storiesOf('Button', module)
+storiesOf('Atoms/Button', module)
   .addDecorator(withKnobs)
   .add('Primary', primary)
   .add('Secondary', secondary);
