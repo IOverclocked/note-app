@@ -20,7 +20,8 @@ const Wrapper = styled.div`
   padding: 25px 0;
   width: 150px;
   height: 100vh;
-  background-color: ${({ theme, activeColor }) => theme[activeColor]};
+  background-color: ${({ theme, activeColor }) =>
+    theme && activeColor ? theme[activeColor] : theme.note};
 `;
 
 const Logo = styled(NavLink)`
@@ -45,12 +46,12 @@ const ButtonLogout = styled(ButtonIcon)`
   margin: auto 0 0;
 `;
 
-const Sidebar = ({ sidebarType }) => (
-  <Wrapper activeColor={sidebarType}>
+const Sidebar = ({ activeColor }) => (
+  <Wrapper activeColor={activeColor}>
     <Logo to="/" />
     <NavList>
       <li>
-        <ButtonIcon as={NavLink} to="/" icon={penIcon} activeclass="active" />
+        <ButtonIcon exact as={NavLink} to="/" icon={penIcon} activeclass="active" />
       </li>
       <li>
         <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeclass="active" />
@@ -64,11 +65,11 @@ const Sidebar = ({ sidebarType }) => (
 );
 
 Sidebar.propTypes = {
-  sidebarType: PropTypes.oneOf(['note', 'article', 'twitter']),
+  activeColor: PropTypes.oneOf(['note', 'article', 'twitter']),
 };
 
 Sidebar.defaultProps = {
-  sidebarType: 'note',
+  activeColor: 'note',
 };
 
 export default Sidebar;
