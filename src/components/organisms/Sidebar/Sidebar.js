@@ -58,7 +58,7 @@ const Sidebar = () => (
         <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeclass="active" />
       </li>
     </NavList>
-    <ButtonLogout as={NavLink} to="/" icon={logoutIcon} />
+    <ButtonLogout as={NavLink} to="/login" icon={logoutIcon} />
   </Wrapper>
 );
 
