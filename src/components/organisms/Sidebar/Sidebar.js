@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
@@ -19,7 +20,7 @@ const Wrapper = styled.div`
   padding: 25px 0;
   width: 150px;
   height: 100vh;
-  background-color: ${({ theme }) => theme.note};
+  background-color: ${({ theme, activeColor }) => theme[activeColor]};
 `;
 
 const Logo = styled(NavLink)`
@@ -44,8 +45,8 @@ const ButtonLogout = styled(ButtonIcon)`
   margin: auto 0 0;
 `;
 
-const Sidebar = () => (
-  <Wrapper>
+const Sidebar = ({ sidebarType }) => (
+  <Wrapper activeColor={sidebarType}>
     <Logo to="/" />
     <NavList>
       <li>
@@ -61,5 +62,13 @@ const Sidebar = () => (
     <ButtonLogout as={NavLink} to="/login" icon={logoutIcon} />
   </Wrapper>
 );
+
+Sidebar.propTypes = {
+  sidebarType: PropTypes.oneOf(['note', 'article', 'twitter']),
+};
+
+Sidebar.defaultProps = {
+  sidebarType: 'note',
+};
 
 export default Sidebar;
