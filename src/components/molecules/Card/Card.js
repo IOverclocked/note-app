@@ -47,7 +47,7 @@ const StyledHeading = styled(Heading)`
 const TwitterAvatar = styled.div`
   width: 86px;
   height: 86px;
-  border: 10px solid ${({ theme }) => theme.twitter};
+  border: 10px solid ${({ theme }) => theme.twitters};
   border-radius: 50%;
   background: ${({ theme }) => theme.white} url(${({ avatar }) => avatar});
   background-position: contain;
@@ -73,30 +73,36 @@ const ArticleLink = styled.a`
   transform: translateY(-50%);
 `;
 
-const Card = ({ cardType }) => (
+const Card = ({ cardType, title, date, twitterName, articleLink, content }) => (
   <Wrapper>
     <InnerWrapper activeColor={cardType}>
-      <StyledHeading>Hello note</StyledHeading>
-      <DateInfo>3 days</DateInfo>
-      {cardType === 'twitter' && <TwitterAvatar avatar="https://avatars.io/twitter/reactjs" />}
-      {cardType === 'article' && <ArticleLink href="#" />}
+      <StyledHeading>{title}</StyledHeading>
+      <DateInfo>{date}</DateInfo>
+      {cardType === 'twitters' && (
+        <TwitterAvatar avatar={`https://avatars.io/twitter/${twitterName}`} />
+      )}
+      {cardType === 'articles' && <ArticleLink href={articleLink} />}
     </InnerWrapper>
     <InnerWrapper flex>
-      <Paragraph>
-        Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet. Lorem
-        ipsum dolor sit amet Lorem ipsum dolor sit amet.
-      </Paragraph>
+      <Paragraph>{content}</Paragraph>
       <Button secondary>Remove</Button>
     </InnerWrapper>
   </Wrapper>
 );
 
 Card.propTypes = {
-  cardType: PropTypes.oneOf(['note', 'article', 'twitter']),
+  cardType: PropTypes.oneOf(['notes', 'articles', 'twitters']),
+  title: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  twitterName: PropTypes.string,
+  articleLink: PropTypes.string,
 };
 
 Card.defaultProps = {
-  cardType: 'note',
+  cardType: 'notes',
+  twitterName: null,
+  articleLink: null,
 };
 
 export default Card;

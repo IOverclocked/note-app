@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   width: 150px;
   height: 100vh;
   background-color: ${({ theme, activeColor }) =>
-    theme && activeColor ? theme[activeColor] : theme.note};
+    theme && activeColor ? theme[activeColor] : theme.notes};
 `;
 
 const Logo = styled(NavLink)`
@@ -65,11 +65,11 @@ const Sidebar = ({ activeColor }) => (
 );
 
 Sidebar.propTypes = {
-  activeColor: PropTypes.oneOf(['note', 'article', 'twitter']),
+  activeColor: PropTypes.oneOf(['notes', 'articles', 'twitters']),
 };
 
 Sidebar.defaultProps = {
-  activeColor: 'note',
+  activeColor: 'notes',
 };
 
 export default Sidebar;

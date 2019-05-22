@@ -5,6 +5,6 @@ import Sidebar from './Sidebar';
 
 storiesOf('Organisms/Sidebar', module)
   .addDecorator(StoryRouter())
-  .add('Note', () => <Sidebar />)
-  .add('Article', () => <Sidebar activeColor="article" />)
-  .add('Twitter', () => <Sidebar activeColor="twitter" />);
+  .add('Notes', () => <Sidebar />)
+  .add('Articles', () => <Sidebar activeColor="articles" />)
+  .add('Twitters', () => <Sidebar activeColor="twitters" />);

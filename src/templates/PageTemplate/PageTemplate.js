@@ -41,7 +41,7 @@ const PageTemplate = ({ children, pageType }) => (
 );
 
 PageTemplate.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
   pageType: PropTypes.string,
 };
 

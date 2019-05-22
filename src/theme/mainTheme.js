@@ -1,7 +1,7 @@
 const theme = {
-  note: 'hsl(49, 100%, 58%)',
-  article: 'hsl(106, 47%, 64%)',
-  twitter: 'hsl(196, 83%, 75%)',
+  notes: 'hsl(49, 100%, 58%)',
+  articles: 'hsl(106, 47%, 64%)',
+  twitters: 'hsl(196, 83%, 75%)',
   grey100: 'hsl(0, 0%, 90%)',
   grey200: 'hsl(0, 0%, 0%)',
   black: 'hsl(0, 0%, 0%)',
