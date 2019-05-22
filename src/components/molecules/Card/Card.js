@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
@@ -73,24 +74,42 @@ const ArticleLink = styled.a`
   transform: translateY(-50%);
 `;
 
-const Card = ({ cardType, title, date, twitterName, articleLink, content }) => (
-  <Wrapper>
-    <InnerWrapper activeColor={cardType}>
-      <StyledHeading>{title}</StyledHeading>
-      <DateInfo>{date}</DateInfo>
-      {cardType === 'twitters' && (
-        <TwitterAvatar avatar={`https://avatars.io/twitter/${twitterName}`} />
-      )}
-      {cardType === 'articles' && <ArticleLink href={articleLink} />}
-    </InnerWrapper>
-    <InnerWrapper flex>
-      <Paragraph>{content}</Paragraph>
-      <Button secondary>Remove</Button>
-    </InnerWrapper>
-  </Wrapper>
-);
+class Card extends Component {
+  state = {
+    redirect: false,
+  };
+
+  handleCardClick = () => this.setState({ redirect: true });
+
+  render() {
+    const { cardType, id, title, date, twitterName, articleLink, content } = this.props;
+    const { redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to={`${cardType}/${id}`} />;
+    }
+
+    return (
+      <Wrapper onClick={this.handleCardClick}>
+        <InnerWrapper activeColor={cardType}>
+          <StyledHeading>{title}</StyledHeading>
+          <DateInfo>{date}</DateInfo>
+          {cardType === 'twitters' && (
+            <TwitterAvatar avatar={`https://avatars.io/twitter/${twitterName}`} />
+          )}
+          {cardType === 'articles' && <ArticleLink href={articleLink} />}
+        </InnerWrapper>
+        <InnerWrapper flex>
+          <Paragraph>{content}</Paragraph>
+          <Button secondary>Remove</Button>
+        </InnerWrapper>
+      </Wrapper>
+    );
+  }
+}
 
 Card.propTypes = {
+  id: PropTypes.number.isRequired,
   cardType: PropTypes.oneOf(['notes', 'articles', 'twitters']),
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
