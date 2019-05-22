@@ -1,5 +1,5 @@
 import React from 'react';
-import PageTemplate from 'templates/PageTemplate/PageTemplate';
+import ContentPageTemplate from 'templates/ContentPageTemplate/ContentPageTemplate';
 import Card from 'components/molecules/Card/Card';
 
 const twittersItem = [
@@ -41,7 +41,7 @@ const twittersItem = [
 ];
 
 const Twitters = () => (
-  <PageTemplate pageType="twitters">
+  <ContentPageTemplate pageType="twitters">
     {twittersItem.map(({ id, title, date, content, twitterName }) => (
       <Card
         key={id}
@@ -53,7 +53,7 @@ const Twitters = () => (
         cardType="twitters"
       />
     ))}
-  </PageTemplate>
+  </ContentPageTemplate>
 );
 
 export default Twitters;

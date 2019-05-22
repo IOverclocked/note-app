@@ -1,5 +1,5 @@
 import React from 'react';
-import PageTemplate from 'templates/PageTemplate/PageTemplate';
+import ContentPageTemplate from 'templates/ContentPageTemplate/ContentPageTemplate';
 import Card from 'components/molecules/Card/Card';
 
 const articlesItem = [
@@ -41,7 +41,7 @@ const articlesItem = [
 ];
 
 const Articles = () => (
-  <PageTemplate pageType="articles">
+  <ContentPageTemplate pageType="articles">
     {articlesItem.map(({ id, title, date, content, articleLink }) => (
       <Card
         key={id}
@@ -53,7 +53,7 @@ const Articles = () => (
         cardType="articles"
       />
     ))}
-  </PageTemplate>
+  </ContentPageTemplate>
 );
 
 export default Articles;
