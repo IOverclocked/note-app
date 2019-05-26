@@ -1,4 +1,7 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import store from 'store';
+import { routes } from 'routes';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import MainTemplate from 'templates/MainTemplate/MainTemplate';
 import Notes from 'views/Notes/Notes';
@@ -7,19 +10,21 @@ import Twitters from 'views/Twitters/Twitters';
 import Details from 'views/Details/Details';
 
 const Root = () => (
-  <MainTemplate>
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" render={() => <Redirect to="/notes" />} />
-        <Route exact path="/notes" component={Notes} />
-        <Route path="/notes/:id" component={Details} />
-        <Route exact path="/articles" component={Articles} />
-        <Route path="/articles/:id" component={Details} />
-        <Route exact path="/twitters" component={Twitters} />
-        <Route path="/twitters/:id" component={Details} />
-      </Switch>
-    </BrowserRouter>
-  </MainTemplate>
+  <Provider store={store}>
+    <MainTemplate>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path={routes.home} render={() => <Redirect to="/notes" />} />
+          <Route exact path={routes.notes} component={Notes} />
+          <Route path={routes.note} component={Details} />
+          <Route exact path={routes.articles} component={Articles} />
+          <Route path={routes.article} component={Details} />
+          <Route exact path={routes.twitters} component={Twitters} />
+          <Route path={routes.twitter} component={Details} />
+        </Switch>
+      </BrowserRouter>
+    </MainTemplate>
+  </Provider>
 );
 
 export default Root;

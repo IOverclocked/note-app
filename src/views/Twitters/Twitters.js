@@ -1,53 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ContentPageTemplate from 'templates/ContentPageTemplate/ContentPageTemplate';
 import Card from 'components/molecules/Card/Card';
 
-const twittersItem = [
-  {
-    id: 1,
-    title: 'Hello note',
-    date: '6 days',
-    content: 'Lorem ipsum dolor sit ament',
-    twitterName: 'reactjs',
-  },
-  {
-    id: 2,
-    title: 'Hello note',
-    date: '6 days',
-    content: 'Lorem ipsum dolor sit ament',
-    twitterName: 'reactjs',
-  },
-  {
-    id: 3,
-    title: 'Hello note',
-    date: '6 days',
-    content: 'Lorem ipsum dolor sit ament',
-    twitterName: 'reactjs',
-  },
-  {
-    id: 4,
-    title: 'Hello note',
-    date: '6 days',
-    content: 'Lorem ipsum dolor sit ament',
-    twitterName: 'reactjs',
-  },
-  {
-    id: 5,
-    title: 'Hello note',
-    date: '6 days',
-    content: 'Lorem ipsum dolor sit ament',
-    twitterName: 'reactjs',
-  },
-];
-
-const Twitters = () => (
+const Twitters = ({ twitters }) => (
   <ContentPageTemplate pageType="twitters">
-    {twittersItem.map(({ id, title, date, content, twitterName }) => (
+    {twitters.map(({ id, title, created, content, twitterName }) => (
       <Card
         key={id}
         id={id}
         title={title}
-        date={date}
+        created={created}
         content={content}
         twitterName={twitterName}
         cardType="twitters"
@@ -56,4 +20,22 @@ const Twitters = () => (
   </ContentPageTemplate>
 );
 
-export default Twitters;
+Twitters.propTypes = {
+  twitters: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      created: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      twitterName: PropTypes.string.isRequired,
+    }),
+  ),
+};
+
+Twitters.defaultProps = {
+  twitters: [],
+};
+
+const mapStateToProps = ({ twitters }) => ({ twitters });
+
+export default connect(mapStateToProps)(Twitters);

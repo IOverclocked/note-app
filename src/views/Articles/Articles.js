@@ -1,59 +1,41 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ContentPageTemplate from 'templates/ContentPageTemplate/ContentPageTemplate';
 import Card from 'components/molecules/Card/Card';
 
-const articlesItem = [
-  {
-    id: 1,
-    title: 'Hello note',
-    date: '6 days',
-    content: 'Lorem ipsum dolor sit ament',
-    articleLink: '#',
-  },
-  {
-    id: 2,
-    title: 'Hello note',
-    date: '6 days',
-    content: 'Lorem ipsum dolor sit ament',
-    articleLink: '#',
-  },
-  {
-    id: 3,
-    title: 'Hello note',
-    date: '6 days',
-    content: 'Lorem ipsum dolor sit ament',
-    articleLink: '#',
-  },
-  {
-    id: 4,
-    title: 'Hello note',
-    date: '6 days',
-    content: 'Lorem ipsum dolor sit ament',
-    articleLink: '#',
-  },
-  {
-    id: 5,
-    title: 'Hello note',
-    date: '6 days',
-    content: 'Lorem ipsum dolor sit ament',
-    articleLink: '#',
-  },
-];
-
-const Articles = () => (
+const Articles = ({ articles }) => (
   <ContentPageTemplate pageType="articles">
-    {articlesItem.map(({ id, title, date, content, articleLink }) => (
+    {articles.map(({ id, title, created, content, articleUrl }) => (
       <Card
         key={id}
         id={id}
         title={title}
-        date={date}
+        created={created}
         content={content}
-        articleLink={articleLink}
+        articleUrl={articleUrl}
         cardType="articles"
       />
     ))}
   </ContentPageTemplate>
 );
 
-export default Articles;
+Articles.propTypes = {
+  articles: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      created: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      articleUrl: PropTypes.string.isRequired,
+    }),
+  ),
+};
+
+Articles.defaultProps = {
+  articles: [],
+};
+
+const mapStateToProps = ({ articles }) => ({ articles });
+
+export default connect(mapStateToProps)(Articles);

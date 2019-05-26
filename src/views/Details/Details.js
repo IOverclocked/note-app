@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DetailsTemplate from 'templates/DetailsTemplate/DetailsTemplate';
-import { routes } from 'routes/routes';
+import { routes } from 'routes';
 
 class Details extends Component {
   state = {
@@ -53,7 +53,9 @@ class Details extends Component {
 }
 
 Details.propTypes = {
-  match: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Details;

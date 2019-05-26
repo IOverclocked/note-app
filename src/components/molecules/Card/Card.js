@@ -7,7 +7,7 @@ import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/link.svg';
 
-const Wrapper = styled.div`
+const StyledWrapper = styled.div`
   min-height: 380px;
   box-shadow: 0 10px 30px -10px ${({ theme }) => theme.shadow};
   border-radius: 10px;
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   grid-template-rows: 0.25fr 1fr;
 `;
 
-const InnerWrapper = styled.div`
+const StyledInnerWrapper = styled.div`
   position: relative;
   padding: 17px 30px;
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.white)};
@@ -35,7 +35,7 @@ const InnerWrapper = styled.div`
     `}
 `;
 
-const DateInfo = styled(Paragraph)`
+const SrtledCreatedInfo = styled(Paragraph)`
   margin: 5px 0 0;
   font-weight: ${({ theme }) => theme.bold};
   font-size: ${({ theme }) => theme.fontSize.xs};
@@ -82,7 +82,7 @@ class Card extends Component {
   handleCardClick = () => this.setState({ redirect: true });
 
   render() {
-    const { cardType, id, title, date, twitterName, articleLink, content } = this.props;
+    const { cardType, id, title, created, twitterName, articleLink, content } = this.props;
     const { redirect } = this.state;
 
     if (redirect) {
@@ -90,20 +90,20 @@ class Card extends Component {
     }
 
     return (
-      <Wrapper onClick={this.handleCardClick}>
-        <InnerWrapper activeColor={cardType}>
+      <StyledWrapper onClick={this.handleCardClick}>
+        <StyledInnerWrapper activeColor={cardType}>
           <StyledHeading>{title}</StyledHeading>
-          <DateInfo>{date}</DateInfo>
+          <SrtledCreatedInfo>{created}</SrtledCreatedInfo>
           {cardType === 'twitters' && (
             <TwitterAvatar avatar={`https://avatars.io/twitter/${twitterName}`} />
           )}
           {cardType === 'articles' && <ArticleLink href={articleLink} />}
-        </InnerWrapper>
-        <InnerWrapper flex>
+        </StyledInnerWrapper>
+        <StyledInnerWrapper flex>
           <Paragraph>{content}</Paragraph>
           <Button secondary>Remove</Button>
-        </InnerWrapper>
-      </Wrapper>
+        </StyledInnerWrapper>
+      </StyledWrapper>
     );
   }
 }
@@ -112,7 +112,7 @@ Card.propTypes = {
   id: PropTypes.number.isRequired,
   cardType: PropTypes.oneOf(['notes', 'articles', 'twitters']),
   title: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
+  created: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   twitterName: PropTypes.string,
   articleLink: PropTypes.string,
