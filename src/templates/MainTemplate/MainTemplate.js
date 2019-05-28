@@ -38,10 +38,10 @@ class MainTemplate extends Component {
     const { children } = this.props;
     const { pageType } = this.state;
     return (
-      <PageContext.provider value={pageType}>
+      <PageContext.Provider value={pageType}>
         <GlobalStyle />
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
-      </PageContext.provider>
+      </PageContext.Provider>
     );
   }
 }
