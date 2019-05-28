@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
 import GlobalStyle from 'theme/GlobalStyle';
 import theme from 'theme/MainTheme';
+import PageContext from 'context';
 
 class MainTemplate extends Component {
   state = {
@@ -22,7 +23,6 @@ class MainTemplate extends Component {
   setCurrentPageType = (prevState = '') => {
     const pages = ['notes', 'articles', 'twitters'];
     const {
-      // eslint-disable-next-line react/prop-types
       location: { pathname },
     } = this.props;
 
@@ -36,17 +36,21 @@ class MainTemplate extends Component {
 
   render() {
     const { children } = this.props;
+    const { pageType } = this.state;
     return (
-      <>
+      <PageContext.provider value={pageType}>
         <GlobalStyle />
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
-      </>
+      </PageContext.provider>
     );
   }
 }
 
 MainTemplate.propTypes = {
   children: PropTypes.element.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withRouter(MainTemplate);

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Input from 'components/atoms/Input/Input';
 import Heading from 'components/atoms/Heading/Heading';
+import withContext from 'hoc/withContext';
 import PageTemplate from '../PageTemplate/PageTemplate';
 
 const StyledWrapper = styled.div`
@@ -54,4 +55,4 @@ ContentPageTemplate.defaultProps = {
   pageType: 'notes',
 };
 
-export default ContentPageTemplate;
+export default withContext(ContentPageTemplate);
