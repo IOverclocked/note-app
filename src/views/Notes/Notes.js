@@ -5,9 +5,9 @@ import ContentPageTemplate from 'templates/ContentPageTemplate/ContentPageTempla
 import Card from 'components/molecules/Card/Card';
 
 const Notes = ({ notes }) => (
-  <ContentPageTemplate pageType="notes">
+  <ContentPageTemplate>
     {notes.map(({ id, title, created, content }) => (
-      <Card key={id} id={id} title={title} created={created} content={content} cardType="notes" />
+      <Card key={id} id={id} title={title} created={created} content={content} />
     ))}
   </ContentPageTemplate>
 );

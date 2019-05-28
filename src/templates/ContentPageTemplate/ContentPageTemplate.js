@@ -33,13 +33,13 @@ const StyledParagraph = styled(Paragraph)`
   font-size: ${({ theme }) => theme.fontSize.m};
 `;
 
-const ContentPageTemplate = ({ children, pageType }) => (
-  <PageTemplate pageType={pageType}>
+const ContentPageTemplate = ({ children, pageContext }) => (
+  <PageTemplate>
     <StyledWrapper>
       <SearchWrapper>
         <Input search placeholder="search..." />
-        <StyledHeading>{pageType}</StyledHeading>
-        <StyledParagraph>6 notes</StyledParagraph>
+        <StyledHeading>{pageContext}</StyledHeading>
+        <StyledParagraph>6 {pageContext}</StyledParagraph>
       </SearchWrapper>
       <StyledGridWrapper>{children}</StyledGridWrapper>
     </StyledWrapper>
@@ -48,11 +48,11 @@ const ContentPageTemplate = ({ children, pageType }) => (
 
 ContentPageTemplate.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
-  pageType: PropTypes.string,
+  pageContext: PropTypes.string,
 };
 
 ContentPageTemplate.defaultProps = {
-  pageType: 'notes',
+  pageContext: 'notes',
 };
 
 export default withContext(ContentPageTemplate);

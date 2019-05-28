@@ -8,6 +8,7 @@ import logoutIcon from 'assets/logout.svg';
 import penIcon from 'assets/pen.svg';
 import twitterIcon from 'assets/twitter.svg';
 import logoIcon from 'assets/logo.svg';
+import withContext from 'hoc/withContext';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -46,8 +47,8 @@ const ButtonLogout = styled(ButtonIcon)`
   margin: auto 0 0;
 `;
 
-const Sidebar = ({ activeColor }) => (
-  <Wrapper activeColor={activeColor}>
+const Sidebar = ({ pageContext }) => (
+  <Wrapper activeColor={pageContext}>
     <Logo to="/" />
     <NavList>
       <li>
@@ -65,11 +66,11 @@ const Sidebar = ({ activeColor }) => (
 );
 
 Sidebar.propTypes = {
-  activeColor: PropTypes.oneOf(['notes', 'articles', 'twitters']),
+  pageContext: PropTypes.oneOf(['notes', 'articles', 'twitters']),
 };
 
 Sidebar.defaultProps = {
-  activeColor: 'notes',
+  pageContext: 'notes',
 };
 
-export default Sidebar;
+export default withContext(Sidebar);

@@ -8,7 +8,6 @@ import PageContext from 'context';
 
 class MainTemplate extends Component {
   state = {
-    // eslint-disable-next-line react/no-unused-state
     pageType: 'notes',
   };
 
@@ -28,9 +27,7 @@ class MainTemplate extends Component {
 
     const currentPage = pages.find(page => pathname.includes(page));
     if (currentPage !== prevState.pageType) {
-      // eslint-disable-next-line react/no-unused-state
       this.setState({ pageType: currentPage });
-      // console.log(this.state);
     }
   };
 

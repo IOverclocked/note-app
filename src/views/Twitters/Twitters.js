@@ -5,7 +5,7 @@ import ContentPageTemplate from 'templates/ContentPageTemplate/ContentPageTempla
 import Card from 'components/molecules/Card/Card';
 
 const Twitters = ({ twitters }) => (
-  <ContentPageTemplate pageType="twitters">
+  <ContentPageTemplate>
     {twitters.map(({ id, title, created, content, twitterName }) => (
       <Card
         key={id}
@@ -14,7 +14,6 @@ const Twitters = ({ twitters }) => (
         created={created}
         content={content}
         twitterName={twitterName}
-        cardType="twitters"
       />
     ))}
   </ContentPageTemplate>

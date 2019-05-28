@@ -5,7 +5,7 @@ import ContentPageTemplate from 'templates/ContentPageTemplate/ContentPageTempla
 import Card from 'components/molecules/Card/Card';
 
 const Articles = ({ articles }) => (
-  <ContentPageTemplate pageType="articles">
+  <ContentPageTemplate>
     {articles.map(({ id, title, created, content, articleUrl }) => (
       <Card
         key={id}
@@ -14,7 +14,6 @@ const Articles = ({ articles }) => (
         created={created}
         content={content}
         articleUrl={articleUrl}
-        cardType="articles"
       />
     ))}
   </ContentPageTemplate>
