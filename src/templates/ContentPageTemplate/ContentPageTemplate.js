@@ -5,9 +5,12 @@ import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Input from 'components/atoms/Input/Input';
 import Heading from 'components/atoms/Heading/Heading';
 import withContext from 'hoc/withContext';
+import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
+import plusIcon from 'assets/plus.svg';
 import PageTemplate from '../PageTemplate/PageTemplate';
 
 const StyledWrapper = styled.div`
+  position: relative;
   padding: 50px 75px;
 `;
 
@@ -33,6 +36,15 @@ const StyledParagraph = styled(Paragraph)`
   font-size: ${({ theme }) => theme.fontSize.m};
 `;
 
+const StyledButtonIcon = styled(ButtonIcon)`
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  border-radius: 50%;
+  background-size: 35%;
+  background-color: ${({ theme, activecolor }) => theme[activecolor]};
+`;
+
 const ContentPageTemplate = ({ children, pageContext }) => (
   <PageTemplate>
     <StyledWrapper>
@@ -42,6 +54,7 @@ const ContentPageTemplate = ({ children, pageContext }) => (
         <StyledParagraph>6 {pageContext}</StyledParagraph>
       </SearchWrapper>
       <StyledGridWrapper>{children}</StyledGridWrapper>
+      <StyledButtonIcon icon={plusIcon} activecolor={pageContext} />
     </StyledWrapper>
   </PageTemplate>
 );
