@@ -17,9 +17,17 @@ const StyledWrapper = styled.div`
 
 const StyledGridWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   grid-gap: 40px;
   padding: 25px 0 0 0;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1466px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 const SearchWrapper = styled.div``;
