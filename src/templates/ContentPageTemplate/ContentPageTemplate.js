@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
@@ -39,6 +39,7 @@ const StyledParagraph = styled(Paragraph)`
 
 const StyledButtonIcon = styled(ButtonIcon)`
   position: fixed;
+  z-index: 10000;
   right: 40px;
   bottom: 40px;
   border-radius: 50%;
@@ -46,20 +47,40 @@ const StyledButtonIcon = styled(ButtonIcon)`
   background-color: ${({ theme, activecolor }) => theme[activecolor]};
 `;
 
-const ContentPageTemplate = ({ children, pageContext }) => (
-  <PageTemplate>
-    <StyledWrapper>
-      <SearchWrapper>
-        <Input search placeholder="search..." />
-        <StyledHeading>{pageContext}</StyledHeading>
-        <StyledParagraph>6 {pageContext}</StyledParagraph>
-      </SearchWrapper>
-      <StyledGridWrapper>{children}</StyledGridWrapper>
-      <StyledButtonIcon icon={plusIcon} activecolor={pageContext} />
-      <NewItemBar />
-    </StyledWrapper>
-  </PageTemplate>
-);
+class ContentPageTemplate extends Component {
+  state = {
+    newItemBarVisible: false,
+  };
+
+  handleToggleVisible = () => {
+    this.setState(prevState => ({
+      newItemBarVisible: !prevState.newItemBarVisible,
+    }));
+  };
+
+  render() {
+    const { children, pageContext } = this.props;
+    const { newItemBarVisible } = this.state;
+    return (
+      <PageTemplate>
+        <StyledWrapper>
+          <SearchWrapper>
+            <Input search placeholder="search..." />
+            <StyledHeading>{pageContext}</StyledHeading>
+            <StyledParagraph>6 {pageContext}</StyledParagraph>
+          </SearchWrapper>
+          <StyledGridWrapper>{children}</StyledGridWrapper>
+          <StyledButtonIcon
+            onClick={this.handleToggleVisible}
+            icon={plusIcon}
+            activecolor={pageContext}
+          />
+          <NewItemBar isVisible={newItemBarVisible} />
+        </StyledWrapper>
+      </PageTemplate>
+    );
+  }
+}
 
 ContentPageTemplate.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
