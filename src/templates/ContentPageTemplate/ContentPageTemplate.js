@@ -7,6 +7,7 @@ import Heading from 'components/atoms/Heading/Heading';
 import withContext from 'hoc/withContext';
 import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
 import plusIcon from 'assets/plus.svg';
+import NewItemBar from 'components/organisms/NewItemBar/NewItemBar';
 import PageTemplate from '../PageTemplate/PageTemplate';
 
 const StyledWrapper = styled.div`
@@ -55,6 +56,7 @@ const ContentPageTemplate = ({ children, pageContext }) => (
       </SearchWrapper>
       <StyledGridWrapper>{children}</StyledGridWrapper>
       <StyledButtonIcon icon={plusIcon} activecolor={pageContext} />
+      <NewItemBar />
     </StyledWrapper>
   </PageTemplate>
 );
