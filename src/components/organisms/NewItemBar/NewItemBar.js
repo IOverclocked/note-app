@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addItem as addItemAction } from 'actions';
 import PropTypes from 'prop-types';
 import withContext from 'hoc/withContext';
 import styled from 'styled-components';
@@ -39,6 +41,7 @@ class NewItemBar extends Component {
   static propTypes = {
     pageContext: PropTypes.oneOf(['notes', 'articles', 'twitters']),
     isVisible: PropTypes.bool.isRequired,
+    addItem: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -48,7 +51,7 @@ class NewItemBar extends Component {
   state = {};
 
   render() {
-    const { pageContext, isVisible } = this.props;
+    const { pageContext, isVisible, addItem } = this.props;
     return (
       <StyledWrapper activecolor={pageContext} isVisible={isVisible}>
         <Heading>Create new {pageContext}</Heading>
@@ -57,10 +60,31 @@ class NewItemBar extends Component {
         />
         {pageContext === 'articles' && <StyledInput placeholder="Link" />}
         <StyledTextarea as="textarea" placeholder="Content..." />
-        <StyledButton activecolor={pageContext}>ADD NOTE</StyledButton>
+        <StyledButton
+          activecolor={pageContext}
+          onClick={() =>
+            addItem(pageContext, {
+              title: 'title',
+              content: 'content',
+            })
+          }
+        >
+          ADD NOTE
+        </StyledButton>
       </StyledWrapper>
     );
   }
 }
 
-export default withContext(NewItemBar);
+const mapDispatchToProps = dispatch => {
+  return {
+    addItem: (itemType, itemContent) => {
+      dispatch(addItemAction(itemType, itemContent));
+    },
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(withContext(NewItemBar));
