@@ -9,6 +9,7 @@ import Input from 'components/atoms/Input/Input';
 import Button from 'components/atoms/Button/Button';
 
 const StyledWrapper = styled.div`
+  background-color: ${({ theme }) => theme.white};
   position: fixed;
   top: 0;
   bottom: 0;
