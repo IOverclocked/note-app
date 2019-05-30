@@ -83,7 +83,7 @@ class ContentPageTemplate extends Component {
             icon={plusIcon}
             activecolor={pageContext}
           />
-          <NewItemBar isVisible={newItemBarVisible} />
+          <NewItemBar isVisible={newItemBarVisible} handleClose={this.handleToggleVisible} />
         </StyledWrapper>
       </PageTemplate>
     );
