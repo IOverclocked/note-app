@@ -5,6 +5,7 @@
   "dependencies": {
     "@storybook/addon-knobs": "^5.0.11",
     "eslint": "^5.16.0",
+    "formik": "^1.5.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
