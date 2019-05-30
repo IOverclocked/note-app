@@ -7,6 +7,7 @@ const theme = {
   black: 'hsl(0, 0%, 0%)',
   white: 'hsl(0, 0%, 100%)',
   shadow: 'hsla(0, 0%, 0%, 0.1)',
+  validate: 'hsla(360, 100%, 50%, 0.9)',
 
   light: 300,
   bold: 600,

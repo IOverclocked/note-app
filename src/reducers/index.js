@@ -1,7 +1,31 @@
 const initialState = {
   twitters: [
     {
-      id: 1,
+      id: '1',
+      title: 'Hello Roman',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+      created: '1 day',
+      twitterName: 'hello_roman',
+    },
+    {
+      id: '2',
+      title: 'Hello Roman',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+      created: '1 day',
+      twitterName: 'hello_roman',
+    },
+    {
+      id: '3',
+      title: 'Hello Roman',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+      created: '1 day',
+      twitterName: 'hello_roman',
+    },
+    {
+      id: '4',
       title: 'Hello Roman',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -11,7 +35,31 @@ const initialState = {
   ],
   articles: [
     {
-      id: 1,
+      id: '1',
+      title: 'Hello Roman',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+      created: '1 day',
+      articleUrl: 'https://youtube.com/helloroman',
+    },
+    {
+      id: '2',
+      title: 'Hello Roman',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+      created: '1 day',
+      articleUrl: 'https://youtube.com/helloroman',
+    },
+    {
+      id: '3',
+      title: 'Hello Roman',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+      created: '1 day',
+      articleUrl: 'https://youtube.com/helloroman',
+    },
+    {
+      id: '4',
       title: 'Hello Roman',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -21,7 +69,28 @@ const initialState = {
   ],
   notes: [
     {
-      id: 1,
+      id: '1',
+      title: 'Hello Roman',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+      created: '1 day',
+    },
+    {
+      id: '2',
+      title: 'Hello Roman',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+      created: '1 day',
+    },
+    {
+      id: '3',
+      title: 'Hello Roman',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+      created: '1 day',
+    },
+    {
+      id: '4',
       title: 'Hello Roman',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
