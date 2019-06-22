@@ -10,7 +10,7 @@ import twitterIcon from 'assets/twitter.svg';
 import logoIcon from 'assets/logo.svg';
 import withContext from 'hoc/withContext';
 
-const Wrapper = styled.div`
+const StyledWrapper = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -25,7 +25,7 @@ const Wrapper = styled.div`
     theme && activeColor ? theme[activeColor] : theme.notes};
 `;
 
-const Logo = styled(NavLink)`
+const StyledLogo = styled(NavLink)`
   display: block;
   width: 67px;
   height: 67px;
@@ -37,20 +37,20 @@ const Logo = styled(NavLink)`
   border: none;
 `;
 
-const NavList = styled.ul`
+const StyledNavList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
 `;
 
-const ButtonLogout = styled(ButtonIcon)`
+const StyledButtonLogout = styled(ButtonIcon)`
   margin: auto 0 0;
 `;
 
 const Sidebar = ({ pageContext }) => (
-  <Wrapper activeColor={pageContext}>
-    <Logo to="/" />
-    <NavList>
+  <StyledWrapper activeColor={pageContext}>
+    <StyledLogo to="/" />
+    <StyledNavList>
       <li>
         <ButtonIcon exact as={NavLink} to="/notes" icon={penIcon} activeclass="active" />
       </li>
@@ -60,9 +60,9 @@ const Sidebar = ({ pageContext }) => (
       <li>
         <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeclass="active" />
       </li>
-    </NavList>
-    <ButtonLogout as={NavLink} to="/login" icon={logoutIcon} />
-  </Wrapper>
+    </StyledNavList>
+    <StyledButtonLogout as={NavLink} to="/login" icon={logoutIcon} />
+  </StyledWrapper>
 );
 
 Sidebar.propTypes = {
