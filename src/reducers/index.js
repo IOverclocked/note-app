@@ -1,117 +1,30 @@
-const initialState = {
-  twitters: [
-    {
-      id: '1',
-      title: 'Hello Roman',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-      twitterName: 'hello_roman',
-    },
-    {
-      id: '2',
-      title: 'Hello Roman',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-      twitterName: 'hello_roman',
-    },
-    {
-      id: '3',
-      title: 'Hello Roman',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-      twitterName: 'hello_roman',
-    },
-    {
-      id: '4',
-      title: 'Hello Roman',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-      twitterName: 'hello_roman',
-    },
-  ],
-  articles: [
-    {
-      id: '1',
-      title: 'Hello Roman',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-      articleUrl: 'https://youtube.com/helloroman',
-    },
-    {
-      id: '2',
-      title: 'Hello Roman',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-      articleUrl: 'https://youtube.com/helloroman',
-    },
-    {
-      id: '3',
-      title: 'Hello Roman',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-      articleUrl: 'https://youtube.com/helloroman',
-    },
-    {
-      id: '4',
-      title: 'Hello Roman',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-      articleUrl: 'https://youtube.com/helloroman',
-    },
-  ],
-  notes: [
-    {
-      id: '1',
-      title: 'Hello Roman',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-    },
-    {
-      id: '2',
-      title: 'Hello Roman',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-    },
-    {
-      id: '3',
-      title: 'Hello Roman',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-    },
-    {
-      id: '4',
-      title: 'Hello Roman',
-      content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
-    },
-  ],
-};
+import { REMOVE_ITEM, ADD_ITEM, LOGOUT, AUTHENTICATE_SUCCESS } from 'actions';
+
+const initialState = {};
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'REMOVE_ITEM':
+    case REMOVE_ITEM:
       return {
         ...state,
         [action.payload.itemType]: [
           ...state[action.payload.itemType].filter(item => item.id !== action.payload.id),
         ],
       };
-    case 'ADD_ITEM':
+    case ADD_ITEM:
       return {
         ...state,
         [action.payload.itemType]: [...state[action.payload.itemType], action.payload.item],
+      };
+    case AUTHENTICATE_SUCCESS:
+      return {
+        ...state,
+        userId: action.payload.data._id,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        userId: action.payload.userId,
       };
     default:
       return state;

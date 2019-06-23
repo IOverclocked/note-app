@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { routes } from 'routes';
 import { withRouter } from 'react-router';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import axios from 'axios';
+import { Formik, ErrorMessage } from 'formik';
 import Input from 'components/atoms/Input/Input';
 import Button from 'components/atoms/Button/Button';
 import Heading from 'components/atoms/Heading/Heading';
+import { connect } from 'react-redux';
+import { authenticate as authenticateAction, register as registerAction } from 'actions';
 
 const StyledWrapper = styled.div`
   background-color: ${({ theme }) => theme.white};
@@ -21,7 +22,7 @@ const StyledWrapper = styled.div`
   align-items: center;
 `;
 
-const StyledForm = styled(Form)`
+const StyledForm = styled.form`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -48,19 +49,25 @@ const StyledLink = styled(Link)`
 
 const StyledErrorMessage = styled.div`
   color: ${({ theme }) => theme.validate};
+  margin: 0 0 1em 0;
 `;
 
 class LoginForm extends Component {
-  static propsTypes = {
+  static propTypes = {
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
+    authenticate: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired,
+    userId: PropTypes.string,
+  };
+
+  static defaultProps = {
+    userId: '',
   };
 
   state = {
     isRegister: undefined,
-    urlRegister: 'http://localhost:9000/api/user/register',
-    urlLogin: 'http://localhost:9000/api/user/login',
   };
 
   componentDidMount() {
@@ -72,32 +79,32 @@ class LoginForm extends Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    this.checkLocation(prevState);
-  }
-
-  checkLocation = prevState => {
-    if (prevState) {
-      const { isRegister } = this.state;
-      const {
-        location: { pathname },
-      } = this.props;
-      if (prevState.isRegister === isRegister) {
-        this.setState({
-          isRegister: !pathname.includes('login'),
-        });
-      }
-    }
+  toggleForm = () => {
+    const { isRegister } = this.state;
+    this.setState({
+      isRegister: !isRegister,
+    });
   };
 
-  // todo -> dokończyć akcje logowania i rejstracji
   render() {
-    const { isRegister, urlLogin, urlRegister } = this.state;
+    const { isRegister } = this.state;
+    const { authenticate, register, userId } = this.props;
+    if (userId) {
+      return <Redirect to={routes.home} />;
+    }
     return (
       <StyledWrapper>
         <Heading>Sign in</Heading>
         <Formik
+          // todo wyświetlanie komunkatów o niepoprawnych danych logowania
           initialValues={{ username: '', password: '' }}
+          onSubmit={({ username, password }) => {
+            if (isRegister) {
+              register(username, password);
+            } else {
+              authenticate(username, password);
+            }
+          }}
           validate={({ username, password }) => {
             const errors = {};
             if (!username) {
@@ -106,55 +113,40 @@ class LoginForm extends Component {
               errors.password = 'Password is required';
             }
 
-            // if (isRegister) {
-            //   return axios
-            //     .post(urlRegister, {
-            //       username,
-            //       password,
-            //     })
-            //     .then(res => {
-            //       console.log('Success', res);
-            //     })
-            //     .catch(err => {
-            //       console.log('error', err);
-            //       throw errors;
-            //     });
-            // }
-            return axios
-              .post(urlLogin, {
-                username,
-                password,
-              })
-              .then(res => {
-                console.log('Success', res);
-              })
-              .catch(err => {
-                console.log('error', err);
-                throw errors;
-              });
-          }}
-          onSubmit={({ username, password }) => {
-            console.log(username, password);
+            return errors;
           }}
         >
-          {() => (
-            <StyledForm>
-              <Field type="text" name="username" placeholder="Login" component={StyledInput} />
-              {/* <ErrorMessage name="username" component={StyledErrorMessage} /> */}
-              <Field
+          {({ values, handleChange, handleBlur, handleSubmit }) => (
+            <StyledForm onSubmit={handleSubmit}>
+              <StyledInput
+                type="text"
+                name="username"
+                placeholder="Login"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+              />
+              <ErrorMessage name="username" component={StyledErrorMessage} />
+              <StyledInput
                 type="password"
                 name="password"
                 placeholder="Password"
-                component={StyledInput}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
               />
-              {/* <ErrorMessage name="password" component={StyledErrorMessage} /> */}
+              <ErrorMessage name="password" component={StyledErrorMessage} />
               <Button type="submit" activecolor="notes">
                 {isRegister ? 'Register' : 'Login'}
               </Button>
               {isRegister ? (
-                <StyledLink to={routes.login}>I want my account!</StyledLink>
+                <StyledLink to={routes.login} onClick={this.toggleForm}>
+                  I want my account!
+                </StyledLink>
               ) : (
-                <StyledLink to={routes.register}>I want to log in!</StyledLink>
+                <StyledLink to={routes.register} onClick={this.toggleForm}>
+                  I want to log in!
+                </StyledLink>
               )}
             </StyledForm>
           )}
@@ -164,4 +156,16 @@ class LoginForm extends Component {
   }
 }
 
-export default withRouter(LoginForm);
+const mapStateToProps = ({ userId = null }) => ({
+  userId,
+});
+
+const mapDispatchToProps = dispatch => ({
+  authenticate: (username, password) => dispatch(authenticateAction(username, password)),
+  register: (username, password) => dispatch(registerAction(username, password)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withRouter(LoginForm));
