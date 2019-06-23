@@ -3,5 +3,5 @@ const note = require('./NoteController');
 
 module.exports = {
   user,
-  note,
+  note
 };

@@ -1,6 +1,10 @@
-import { REMOVE_ITEM, ADD_ITEM, LOGOUT, AUTHENTICATE_SUCCESS } from 'actions';
+import { REMOVE_ITEM, ADD_ITEM_SUCCESS, LOGOUT, AUTHENTICATE_SUCCESS } from 'actions';
 
-const initialState = {};
+const initialState = {
+  notes: [],
+  twitters: [],
+  articles: [],
+};
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -11,10 +15,10 @@ const rootReducer = (state = initialState, action) => {
           ...state[action.payload.itemType].filter(item => item.id !== action.payload.id),
         ],
       };
-    case ADD_ITEM:
+    case ADD_ITEM_SUCCESS:
       return {
         ...state,
-        [action.payload.itemType]: [...state[action.payload.itemType], action.payload.item],
+        [action.payload.itemType]: [...state[action.payload.itemType], action.payload.data],
       };
     case AUTHENTICATE_SUCCESS:
       return {
